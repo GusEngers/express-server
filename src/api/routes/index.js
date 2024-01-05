@@ -1,7 +1,5 @@
 const api = require('express').Router();
 
-const { homeController } = require('../controllers');
-
-api.route('/').get(homeController);
+// RUTAS PARA MANEJAR LAS SOLICITUDES DEL SERVIDOR
 
 module.exports = api;
