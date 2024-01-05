@@ -1,21 +1,16 @@
 const app = require('./src/app');
-require('dotenv').config();
+const db = require('./src/config/db');
+const { PORT, MODE } = require('./src/utils/constants');
 
+/**
+ * Ejecuta la conexión a la base de datos y habilita que el servidor
+ * empiece a escuchar solicitudes
+ */
 async function main() {
   try {
-    const { PORT = 3000, NODE_ENV } = process.env;
-
-    if (NODE_ENV === 'production') {
-      process.stdout.write('[INFO] Production mode enabled');
-      // Configuraciones en modo producción
-    }
-    if (NODE_ENV === 'development') {
-      process.stdout.write('[INFO] Development mode enabled');
-      // Configuraciones en modo desarrollo
-    }
-
+    await db();
     app.listen(PORT, () => {
-      process.stdout.write(`[INFO] Server listening on port: ${PORT}`);
+      process.stdout.write(`[INFO] Server listening on port '${PORT}' in '${MODE}' mode\n`);
     });
   } catch (error) {
     process.stdout.write(`[ERROR] Error starting server: ${error.message}`);
