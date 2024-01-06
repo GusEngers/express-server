@@ -1,3 +1,5 @@
+const ApiError = require('./error-class-api');
+
 require('dotenv').config();
 
 /**

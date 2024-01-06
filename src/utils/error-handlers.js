@@ -3,11 +3,12 @@ const ApiError = require('./error-class-api');
 module.exports = {
   /**
    * Middleware de manejo de errores en la sección API
-   * @param {Error} err
+   * @param {Error|ApiError} err
    * @param {Request} req
    * @param {Response} res
    */
   apiErrorHandler: (err, req, res, next) => {
+    console.log(err);
     if (err instanceof ApiError) {
       return res.status(err.statusCode).json(err.response);
     }
